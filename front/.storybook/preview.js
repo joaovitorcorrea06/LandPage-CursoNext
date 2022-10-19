@@ -8,7 +8,7 @@ export const parameters = {
   //   default: 'light'
   // }
   backgrounds: {
-    default: 'facebook',
+    default: 'light',
     values: [
       {
         name: 'twitter',
