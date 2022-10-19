@@ -4,6 +4,30 @@ import { theme } from '../src/styles/theme';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
+  // background:{
+  //   default: 'light'
+  // }
+  backgrounds: {
+    default: 'facebook',
+    values: [
+      {
+        name: 'twitter',
+        value: '#00aced',
+      },
+      {
+        name: 'facebook',
+        value: '#3b5998',
+      },
+      {
+        name: 'light',
+        value: theme.colors.white,
+      },
+      {
+        name: 'dark',
+        value: theme.colors.primaryColor,
+      },
+    ],
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,

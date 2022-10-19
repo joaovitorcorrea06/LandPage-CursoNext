@@ -6,6 +6,7 @@ export const GlobalStyles = createGlobalStyle`
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -14,10 +15,10 @@ html {
 
 body{
   font-size: 2.4rem;
-  font-family: 'Open Sans', sans-serif;
+  font-family: ${({ theme }) => theme.font.family.default};
 }
 
-h1 {
-  font-family: 'Montserrat', sans-serif;
+h1,h2,h3,h4,h5,h6 {
+  font-family: ${({ theme }) => theme.font.family.secondary}
 }
 `;
