@@ -37,9 +37,10 @@ describe('<MenuLink />', () => {
         text-decoration: none;
         font-size: 1.6rem;
         padding: 1.6rem;
-        color: #0A1128;
+        color: #0a1128;
         position: relative;
       }
+
       .c0::after {
         content: '';
         position: absolute;
@@ -51,10 +52,12 @@ describe('<MenuLink />', () => {
         -webkit-transition: all 300ms ease-in-out;
         transition: all 300ms ease-in-out;
       }
+
       .c0:hover::after {
         left: 25%;
         width: 50%;
       }
+
       <a
         class="c0"
         href="http://localhost"
