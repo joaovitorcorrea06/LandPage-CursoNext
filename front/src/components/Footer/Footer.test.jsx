@@ -1,9 +1,10 @@
 import { screen } from '@testing-library/react';
 import { renderTheme } from '../../styles/render-theme';
 import { Footer } from '.';
+
 describe('<Footer />', () => {
   it('should render', () => {
-    const { container } = renderTheme(<Footer html={'<h1>Olá</h1>'} />);
+    const { container } = renderTheme(<Footer footerHtml={'<h1>Olá</h1>'} />);
     expect(screen.getByRole('heading', { name: 'Olá' })).toBeInTheDocument();
     expect(container).toMatchInlineSnapshot(`
       .c4 {
@@ -41,12 +42,3 @@ describe('<Footer />', () => {
               class="c3 c4"
             >
               <h1>
-                Olá
-              </h1>
-            </div>
-          </div>
-        </footer>
-      </div>
-    `);
-  });
-});
