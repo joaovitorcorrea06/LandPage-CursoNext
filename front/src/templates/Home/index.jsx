@@ -3,6 +3,7 @@ import { mapData } from '../../api/map-data';
 import { mockBase } from '../Base/mock';
 import { Base } from '../Base';
 import { PageNotFound } from '../PageNotFound';
+import { Loading } from '../Loading';
 
 function Home() {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ function Home() {
     const load = async () => {
       try {
         const data = await fetch(
-          'http://localhost:1337/api/pages/?filters[slug]=landing-page&populate=deep',
+          'http://localhost:1337/api/pages/?filters[slug]=landing-page',
         );
         const json = await data.json();
         const { attributes } = json.data[0];
@@ -36,8 +37,24 @@ function Home() {
   }
 
   if (data && !data.slug) {
-    return <h1>Carregando...</h1>;
+    return <Loading />;
   }
-  return <Base {...mockBase} />;
+
+  const { menu, sections, footerHtml } = data;
+  const { links, text, link, srcImg } = menu;
+
+  console.log(data);
+
+  return (
+    <Base
+      links={links}
+      footerHtml={footerHtml}
+      logoData={{ text, link, srcImg }}
+    >
+      <h1>Oi</h1>
+      <h1>Oi</h1>
+      <h1>Oi</h1>
+    </Base>
+  );
 }
 export default Home;
