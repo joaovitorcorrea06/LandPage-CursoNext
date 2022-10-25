@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import * as Styled from './styles';
 
@@ -17,13 +18,17 @@ import { Loading } from '../Loading';
 
 function Home() {
   const [data, setData] = useState([]);
+  // const location = useLocation();
   const isMounted = useRef(true);
 
   useEffect(() => {
+    // const pathname = location.pathname.replace(/[^a-z0-9-_]/gi, '');
+    const pathname = '';
+    const slug = pathname ? pathname : 'landing-page';
     const load = async () => {
       try {
         const data = await fetch(
-          'http://localhost:1337/api/pages/?filters[slug]=landing-page&populate=deep',
+          `http://localhost:1337/api/pages/?filters[slug]=${slug}&populate=deep`,
         );
         const json = await data.json();
         const { attributes } = json.data[0];
