@@ -1,5 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+
+import * as Styled from './styles';
+
 import { mapData } from '../../api/map-data';
+
+import { Heading } from '../../components/Heading';
+import { GridTwoColum } from '../../components/GridTwoColumn';
+import { GridContent } from '../../components/GridContent';
+import { GridText } from '../../components/GridText';
+import { GridImage } from '../../components/GridImage';
+
 import { mockBase } from '../Base/mock';
 import { Base } from '../Base';
 import { PageNotFound } from '../PageNotFound';
@@ -13,7 +23,7 @@ function Home() {
     const load = async () => {
       try {
         const data = await fetch(
-          'http://localhost:1337/api/pages/?filters[slug]=landing-page',
+          'http://localhost:1337/api/pages/?filters[slug]=landing-page&populate=deep',
         );
         const json = await data.json();
         const { attributes } = json.data[0];
@@ -40,10 +50,10 @@ function Home() {
     return <Loading />;
   }
 
-  const { menu, sections, footerHtml } = data;
+  const { menu, sections, footerHtml, slug } = data;
   const { links, text, link, srcImg } = menu;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <Base
@@ -51,9 +61,26 @@ function Home() {
       footerHtml={footerHtml}
       logoData={{ text, link, srcImg }}
     >
-      <h1>Oi</h1>
-      <h1>Oi</h1>
-      <h1>Oi</h1>
+      {sections.map((section, index) => {
+        const { component } = section;
+        const key = `${slug}-${index}`;
+
+        if (component === 'section.section-two-columns') {
+          return <GridTwoColum key={key} {...section} />;
+        }
+
+        if (component === 'section.section-content') {
+          return <GridContent key={key} {...section} />;
+        }
+
+        if (component === 'section.section-grid-text') {
+          return <GridText key={key} {...section} />;
+        }
+
+        if (component === 'section.section-grid-image') {
+          return <GridImage key={key} {...section} />;
+        }
+      })}
     </Base>
   );
 }
